@@ -18,14 +18,22 @@ include 'dbconnect.php';
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
     </script>
+    <style>
+    .text-head{
+        
+    }
+    
+    </style>
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    
+    <h2 class="text-primary text-center text-head my-4 p-4">Student Details</h2>
+
                     <table class="table" id="myTable">
                         <thead>
                             <tr>
                                 <th scope="col">Sr.No</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Email ID:</th>
-                                <th scope="col">Password</th>            
                             </tr>
                         </thead>
                         <tbody>';
@@ -38,17 +46,51 @@ include 'dbconnect.php';
                             <th scope='row'>$sno</th>
                             <td>".$row['username']."</td>
                             <td>".$row['email']."</td>
-                            <td>".$row['password']."</td> 
                             </tr>";
-                            echo "<br>";
                         };
                         echo"</tbody>
                         </table>
                         <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
-    });
+    })
+    </script>";
+
+    // for table of feedback
+    echo'
+    <h2 class="text-primary text-center text-head my-4 p-4">Student Feedback Details</h2>
+    <table class="table" id="myTable2">
+    <thead>
+        <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Username</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Roll No.</th>
+            <th scope="col">Feedback</th>
+        </tr>
+    </thead>
+    <tbody>';
+    $feedbacksql="SELECT * FROM `feedback_details`";
+                        $result2=mysqli_query($conn, $feedbacksql);
+                        $sno2=0;
+                        while($row2=mysqli_fetch_assoc($result2)){
+                            $sno2=$sno2+1;
+                            echo " <tr>
+                            <th scope='row'>$sno2</th>
+                            <td>".$row2['username']."</td>
+                            <td>".$row2['branch']."</td>
+                            <td>".$row2['rollno']."</td>
+                            <td>".$row2['feedback']."</td>
+                            </tr>";
+                        };
+                        echo"</tbody>
+                        </table>
+                        <script>
+    $(document).ready(function() {
+        $('#myTable2').DataTable();
+    })++
     </script>
+    <h2 class='text-center'><a href='admin_message.php'>Click Here To Message User</a></h2>
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
         integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p' crossorigin='anonymous'>
     </script>
